@@ -443,7 +443,7 @@ Maestro BPMN/
 
 ---
 
-## 🏆Sailent Features
+## 🏆Salient  Features
 
 1. **End-to-End Automation** — From vendor application to ERP record creation, zero manual data entry
 2. **Parallel AI Risk Assessment** — 5 agents run simultaneously, cutting risk review from days to minutes
