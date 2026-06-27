@@ -1,5 +1,4 @@
 ---
-
 # 🏛️ VendorTrust AI — Intelligent Vendor Onboarding & Risk Management
 
 > **UiPath Hackathon Submission** | Built on UiPath Maestro BPMN · Process Orchestration · AI Agents · RPA
