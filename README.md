@@ -1,4 +1,3 @@
-
 # 🏛️ VendorTrust AI — Intelligent Vendor Onboarding & Risk Management
 
 > **UiPath Hackathon Submission** | Built on UiPath Maestro BPMN · Process Orchestration · AI Agents · RPA
@@ -14,10 +13,11 @@
 5. [UiPath Components Used](#uipath-components-used)
 6. [Agent Type](#agent-type)
 7. [Architecture Diagram](#architecture-diagram)
-8. [Setup Instructions](#setup-instructions)
-9. [How to Test](#how-to-test)
-10. [Key Scenarios & Edge Cases](#key-scenarios--edge-cases)
-11. [Project Structure](#project-structure)
+8. [Flowchart](#flowchart)
+9. [Setup Instructions](#setup-instructions)
+10. [How to Test](#how-to-test)
+11. [Key Scenarios & Edge Cases](#key-scenarios--edge-cases)
+12. [Project Structure](#project-structure)
 
 ---
 
@@ -28,7 +28,7 @@
 - **Validates vendor documents** using AI document intelligence
 - **Assesses multi-dimensional risk** in parallel (compliance, financial, cybersecurity, ESG, reputation) using five dedicated AI agents running simultaneously
 - **Routes decisions** to the right human reviewer based on calculated risk score (0–100 scale)
-- **Analyses contracts** via an AI legal agent before routing through a 5-stage approval chain
+- **Analyses contracts** via an AI legal agent before routing through a structured approval chain
 - **Creates vendor master records** in ERP via RPA bots automatically once approved
 - **Monitors vendor risk continuously** post-onboarding with a recurring AI re-assessment subprocess
 
@@ -98,23 +98,14 @@ Five dedicated AI agents run **in parallel** — dramatically reducing turnaroun
 - Output is presented to the **Legal Team** for final contract sign-off
 - If revisions are needed → contract revision loop with the vendor
 
-### Phase 7 — 5-Stage Sequential Approval Chain
-Each stage has **48-hour automatic reminders** and escalation on non-response:
-
-```
-Procurement Department → Finance Department → Compliance Department → Legal Department → Business Owner
-```
-
-Any single rejection ends the process with a formal rejection notice to the vendor.
-
-### Phase 8 — ERP Integration via RPA
+### Phase 7 — ERP Integration via RPA
 Once fully approved:
 1. **RPA Bot** creates the Vendor Master Record in ERP
 2. **RPA Bot** uploads all compliance and contract documents to ERP
 3. System **generates a unique Vendor ID**
 4. Automatic retry logic (30-minute wait + retry, then manual intervention if retry fails)
 
-### Phase 9 — Parallel Stakeholder Notifications
+### Phase 8 — Parallel Stakeholder Notifications
 All five stakeholders are notified simultaneously:
 - Vendor (onboarding complete + Vendor ID)
 - Procurement Team (vendor ready for use)
@@ -122,7 +113,7 @@ All five stakeholders are notified simultaneously:
 - Compliance Team (vendor approved and logged)
 - Business Owner (vendor successfully onboarded)
 
-### Phase 10 — Audit Trail & Continuous Monitoring
+### Phase 9 — Audit Trail & Continuous Monitoring
 - **Complete audit trail** and compliance log stored
 - **Continuous Monitoring Subprocess** triggers monthly/quarterly/annual AI risk re-assessments
 - If vendor risk level increases → automatic escalation and full reassessment workflow is triggered
@@ -233,6 +224,14 @@ flowchart LR
 
 ---
 
+## 📊 Flowchart
+
+![VendorTrust AI Process Flowchart](flowchart.svg)
+
+> The flowchart above illustrates the complete end-to-end vendor onboarding process — from initial document submission through parallel AI risk assessment, human-in-the-loop review, legal contract analysis, ERP integration, and into continuous post-onboarding monitoring.
+
+---
+
 ## ⚙️ Setup Instructions
 
 ### Prerequisites
@@ -312,7 +311,7 @@ Verify the timer durations in the BPMN:
 4. Confirm all 5 risk agents execute in parallel
 5. Verify risk score is **0–25 (Low)**
 6. Confirm process bypasses human review and proceeds directly to AI Legal Contract Analysis
-7. Complete the 5-stage approval chain (approve at each stage)
+7. Complete the approval chain (approve at each stage)
 8. Verify RPA bot creates the vendor in ERP and generates a Vendor ID
 9. Confirm all 5 stakeholders receive parallel notifications
 10. Verify audit trail is stored and continuous monitoring subprocess starts
@@ -377,7 +376,7 @@ Verify the timer durations in the BPMN:
 6. Contract now acceptable → proceed to approval chain
 
 ### Scenario 10 — Approval Timeout & Reminder
-1. Advance any approval task (e.g., Procurement) past 48 hours without action
+1. Advance any approval task past 48 hours without action
 2. Verify the boundary timer event triggers
 3. Confirm automatic reminder email is sent to the approver
 4. Approve the task → process continues
@@ -434,8 +433,9 @@ Maestro BPMN/
 │                                 #   - Entry Point ID: e6d9e517-93d0-46ef-b0d4-0e62e41b84c2
 │                                 #   - Trigger: Vendor Application Received
 ├── operate.json                  # Process operation configuration
-├── package-descriptor.json         # Package metadata
+├── package-descriptor.json       # Package metadata
 ├── project.uiproj                # UiPath project file
+├── flowchart.svg                 # Process flowchart diagram
 ├── vendortrust-ai-deck.html      # Project presentation deck
 ├── vendortrust-diagram.html      # Visual process diagram
 └── README.md                     # This file
@@ -459,6 +459,3 @@ Maestro BPMN/
 ---
 
 > **Built with ❤️ on UiPath Maestro BPMN · Process Orchestration · AI Agents · RPA**
-
----
-
